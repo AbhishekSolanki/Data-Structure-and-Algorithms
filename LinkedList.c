@@ -28,10 +28,13 @@ void push(struct node** head,int data){
 void pushAtEnd(struct node** head,int data){
 	struct node* newNode = NULL;
 	newNode = (struct node*)malloc(sizeof(struct node));
-	while(head->data!=NULL){
-		head = *head->next;
+	newNode->data=data;
+	newNode->next=NULL;
+	struct node* last = *head;
+	while(last->next!=NULL){
+		last = last->next;
 	}
-	head->next=newNode;
+	last->next=newNode;
 }
 
 int main()
@@ -63,4 +66,3 @@ int main()
     printList(first);
     return 0;
 }
-
