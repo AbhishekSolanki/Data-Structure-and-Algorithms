@@ -24,14 +24,17 @@ public class SearchAlgo {
 			int randomSearch = (int) Math.ceil(Math.random() * 10000000);
 			this.startTime();
 			switch(Algorithm) {
-			case "linear search":
+			case "linear":
 				if(this.linearSearch(dataset, randomSearch)!=-1) hit++; else miss++;
 				break;
-			case "binary search":
+			case "binary":
 				 if(this.binarySearch(dataset, 0, dataset.length-1, randomSearch)!=-1) hit++; else miss++;
 				break;
-			case "jump search":
+			case "jump":
 				 if(this.jumpSearch(dataset, randomSearch)!=-1) hit++; else miss++;
+				break;
+			case "interpolation":
+				 if(this.interpolationSearch(dataset, 0, dataset.length-1, randomSearch)!=-1) hit++; else miss++;
 				break;
 			default:
 				System.out.println("No Such Algo !");
@@ -103,6 +106,28 @@ public class SearchAlgo {
 			return prevBlock;
 		}
 		
+		return -1;
+	}
+	
+	public int interpolationSearch(Integer[] sortedNumbers, int low, int high, int x) {
+		
+		if(high >= low ) {
+			int pos = low+(high-low) / (sortedNumbers[high]-sortedNumbers[low])*(x-sortedNumbers[low]);
+			
+			if(sortedNumbers[pos] == x) {
+				return pos;
+			}
+			
+			if(sortedNumbers[pos] < x) {
+				interpolationSearch(sortedNumbers,pos+1,high,x);
+			}
+			
+		    if(sortedNumbers[pos] > x) {
+		    		interpolationSearch(sortedNumbers,low,pos-1,x);
+			}
+			
+			
+		}
 		return -1;
 	}
 	
