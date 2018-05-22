@@ -21,7 +21,7 @@ public class SearchAlgo {
 		int hit = 0,miss = 0;
 		for(int i=0;i<iteration;i++) {
 			
-			int randomSearch = (int) Math.ceil(Math.random() * 100000000);
+			int randomSearch = (int) Math.ceil(Math.random() * 10000000);
 			this.startTime();
 			switch(Algorithm) {
 			case "linear search":
@@ -30,13 +30,16 @@ public class SearchAlgo {
 			case "binary search":
 				 if(this.binarySearch(dataset, 0, dataset.length-1, randomSearch)!=-1) hit++; else miss++;
 				break;
+			case "jump search":
+				 if(this.jumpSearch(dataset, randomSearch)!=-1) hit++; else miss++;
+				break;
 			default:
 				System.out.println("No Such Algo !");
 			}
 			avgTime.add(this.endTime());
 		}
 		double averageTime = avgTime.stream().mapToLong(i -> i).average().orElse(0);
-		System.out.println(Algorithm+"\t"+averageTime+"\t"+hit+"\t"+miss);
+		System.out.println(Algorithm+" \t"+averageTime+" \t"+hit+" \t"+miss);
 		System.gc();
 	}
 
@@ -50,7 +53,7 @@ public class SearchAlgo {
 	}
 	
 	public int binarySearch(Integer[] sortedNumbers, int low, int high, int x) {
-		startTime();
+	
 		if ( high >= low ) {	
 			int mid = low + (high-low)/2;
 
@@ -68,6 +71,39 @@ public class SearchAlgo {
 
 		return -1;
 	}
-
-
+	
+	public int jumpSearch(Integer[] sortedNumbers, int x) {
+		
+		int arrayLength = sortedNumbers.length;
+		
+		// block size to be jumped to 
+		int jump = (int)Math.floor(Math.sqrt(arrayLength));
+		// store the previous block index for linear serach start
+		int prevBlock = 0;
+		
+		// if element is present 
+		while( sortedNumbers[Math.min(jump, arrayLength)-1] < x) {
+			prevBlock = jump;
+			jump += (int)Math.floor(Math.sqrt(arrayLength));
+			if ( prevBlock > arrayLength) {
+				return -1;
+			}
+		}
+		
+		// linear search between the block
+		while( sortedNumbers[prevBlock] < x ) {
+			prevBlock++;
+			if(prevBlock == Math.min(jump, arrayLength)) {
+				return -1;
+			}
+		}
+		
+		// element found
+		if(sortedNumbers[prevBlock]==x) {
+			return prevBlock;
+		}
+		
+		return -1;
+	}
+	
 }

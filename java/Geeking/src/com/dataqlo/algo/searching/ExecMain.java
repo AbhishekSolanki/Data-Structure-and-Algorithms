@@ -5,7 +5,7 @@ public class ExecMain {
 	
 	//100 Mn sorted no.
 	static int dataSize = 10000000; //10000000;
-	static int iteration= 10000;//1000000;
+	static int iteration= 1000000;//1000000;
 	static Integer sortedNumbers[] = new Integer[dataSize] ;
 	
 	
@@ -19,8 +19,9 @@ public class ExecMain {
 	
 		//1 Mn iteration
 		System.out.println("Algorithm\tTime(ns) \tHit\tMiss \n_________\t________ \t___\t____");
-		//searchAlgoObj.stressAlgorithm("linear search", sortedNumbers, iteration);
+		searchAlgoObj.stressAlgorithm("linear search", sortedNumbers, iteration);
 		searchAlgoObj.stressAlgorithm("binary search", sortedNumbers, iteration);
+		searchAlgoObj.stressAlgorithm("jump search", sortedNumbers, iteration);
 	}
 	
 }
