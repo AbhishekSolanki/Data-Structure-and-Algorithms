@@ -19,10 +19,11 @@ public class ExecMain {
 	
 		//1 Mn iteration
 		System.out.println("Algorithm\tTime(ns) \tHit\tMiss \n_________\t________ \t___\t____");
-		searchAlgoObj.stressAlgorithm("linear", sortedNumbers, iteration);
+		//searchAlgoObj.stressAlgorithm("linear", sortedNumbers, iteration);
 		searchAlgoObj.stressAlgorithm("binary", sortedNumbers, iteration);
-		searchAlgoObj.stressAlgorithm("jump", sortedNumbers, iteration);
+		//searchAlgoObj.stressAlgorithm("jump", sortedNumbers, iteration);
 		searchAlgoObj.stressAlgorithm("interpolation", sortedNumbers, iteration);
+		searchAlgoObj.stressAlgorithm("exponential", sortedNumbers, iteration);
 	}
 	
 }
