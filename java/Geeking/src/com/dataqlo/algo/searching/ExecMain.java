@@ -24,6 +24,7 @@ public class ExecMain {
 		//searchAlgoObj.stressAlgorithm("jump", sortedNumbers, iteration);
 		searchAlgoObj.stressAlgorithm("interpolation", sortedNumbers, iteration);
 		searchAlgoObj.stressAlgorithm("exponential", sortedNumbers, iteration);
+		searchAlgoObj.stressAlgorithm("ternary", sortedNumbers, iteration);
 	}
 	
 }

@@ -40,6 +40,9 @@ public class SearchAlgo {
 			case "exponential":
 				if(this.exponentialSearch(dataset,randomSearch)!=-1) hit++; else miss++;
 				break;
+			case "ternary":
+				if(this.ternarySearch(dataset, 0, dataset.length-1, randomSearch)!=-1) hit++; else miss++;
+				break;
 			default:
 				System.out.println("No Such Algo !");
 			}
@@ -145,6 +148,35 @@ public class SearchAlgo {
 			i=i*2;
 		}
 		return this.binarySearch(sortedNumbers, i/2, Math.min(i, sortedNumbers.length-1), x);
+	}
+	
+	public int ternarySearch(Integer[] sortedNumbers, int low, int high, int x) {
+		
+		if( high >= low) {
+			int mid = low +(high-low)/3;
+			int mid2 = mid+(high-low)/3;
+			
+			if(sortedNumbers[mid]==x) {
+				return mid;
+			}
+			
+			if(sortedNumbers[mid2]==x) {
+				return mid2;
+			}
+			// x in left the one third part 
+			if(sortedNumbers[mid] > x ) {
+				return  ternarySearch(sortedNumbers, low, mid-1, x);
+			}
+			// x in right in one third part 
+			if(sortedNumbers[mid2] < x ) {
+				return  ternarySearch(sortedNumbers, mid2+1, high, x);
+			}
+			
+			// x in between 
+			return ternarySearch(sortedNumbers, mid+1, mid2-1, x);
+		}
+		
+		return -1;
 	}
 
 }
