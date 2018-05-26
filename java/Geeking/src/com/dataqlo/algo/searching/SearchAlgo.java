@@ -22,7 +22,7 @@ public class SearchAlgo {
 		int hit = 0,miss = 0;
 		for(int i=0;i<iteration;i++) {
 
-			int randomSearch = (int) Math.ceil(Math.random() * 10000000);
+			int randomSearch = (int) Math.ceil(Math.random() * 10000);
 			this.startTime();
 			switch(Algorithm) {
 			case "linear":
