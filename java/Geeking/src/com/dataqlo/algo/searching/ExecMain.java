@@ -32,8 +32,11 @@ public class ExecMain {
 		
 		// Sorting Algorithms
 		SortingAlgo sortingAlgoObj = new SortingAlgo();
-		System.out.println("Algorithm\tTime(s) \n_________\t________ ");
-		sortingAlgoObj.stressAlgo("selection",unSortedNumbers,iteration);
+		System.out.println("Algorithm\tTime(ms) \n_________\t________ ");
+		//sortingAlgoObj.stressAlgo("selection",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("bubble",unSortedNumbers,iteration);
+		sortingAlgoObj.stressAlgo("insertion",unSortedNumbers,iteration);
+		
 	}
 	
 }
