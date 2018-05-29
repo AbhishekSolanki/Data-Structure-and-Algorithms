@@ -15,6 +15,13 @@ public class SortingAlgo {
 		long endTime   = System.currentTimeMillis();
 		return (long) ((endTime - startTime));
 	}
+	
+	private void printSorted(Integer[] sortedArray) {
+		for(int i=0;i<sortedArray.length;i++) {
+			System.out.print(sortedArray[i]+" ");
+		}
+	}
+	
 	public void stressAlgo(String Algorithm,Integer[] dataset, int iteration) {
 
 		ArrayList<Long> avgTime = new ArrayList<>();
@@ -30,6 +37,9 @@ public class SortingAlgo {
 				break;
 			case "insertion":
 				this.insertionSort(dataset);
+				break;
+			case "merge":
+				this.mergeSort(dataset,0,dataset.length-1);
 				break;
 			default:
 				System.out.println("No Such Algo !");
@@ -88,5 +98,61 @@ public class SortingAlgo {
 		 unsortedArray[j+1] = key;
 			
 		}
+		//printSorted(unsortedArray);
+	}
+	
+	
+	public void mergeSort(Integer[] unSortedArray, int low, int high) {
+		
+		if(low < high) {
+			int mid = (high + low) / 2 ;
+			mergeSort(unSortedArray, low, mid);
+			mergeSort(unSortedArray, mid+1, high);
+			
+			merge(unSortedArray, low, mid, high);
+			
+		}
+	}
+	
+	private void merge(Integer[] array, int low, int mid, int high) {
+		
+		int leftArraySize = mid - low +1;
+		int rightArraySize = high - mid;
+		
+		int[] leftArray = new int[leftArraySize];
+		int[] rightArray = new int[rightArraySize];
+		
+		for(int i = 0; i < leftArraySize; i++) {
+			leftArray[i] = array[low+i];
+		}
+		
+		for(int j = 0; j < rightArraySize; j++) {
+			rightArray[j] = array[mid +1 +j];
+		}
+		
+		int i = 0, j = 0, k = 0;
+		
+		while (i < leftArraySize && j < rightArraySize ) {
+			
+			if(leftArray[i] <= rightArray[j]) {
+				array[k] = leftArray[i];
+				i++;
+			} else {
+				array[k] = rightArray[j];
+				j++;
+			}
+			k++;
+		}
+		
+		while ( i < leftArraySize) {
+			array[k] = leftArray[i];
+			i++; k++;
+		}
+		
+		while ( j < rightArraySize) {
+			array[k] = rightArray[j];
+			j++; k++;
+		}
+		//printSorted(array);
 	}
 }
