@@ -5,7 +5,7 @@ import com.dataqlo.algo.sorting.SortingAlgo;
 // Main class for searching algorithms, sample data is in sorted form.
 public class ExecMain {
 	
-	static int dataSize = 100000; 
+	static int dataSize = 10000; 
 	static int iteration= 100;
 	static Integer sortedNumbers[] = new Integer[dataSize] ;
 	static Integer unSortedNumbers[] = new Integer[dataSize] ;
@@ -15,8 +15,8 @@ public class ExecMain {
 		
 		for(int i=0;i<dataSize; i++) {
 			sortedNumbers[i]=i;
-			unSortedNumbers[i]=(int) Math.ceil(Math.random() * 100000);
-		//	System.out.print(unSortedNumbers[i]+" ");
+			unSortedNumbers[i]=(int) Math.ceil(Math.random() * 10000);
+			System.out.print(unSortedNumbers[i]+" ");
 		}
 		
 		// Searching Algorithms
@@ -35,8 +35,9 @@ public class ExecMain {
 		System.out.println("Algorithm\tTime(ms) \n_________\t________ ");
 		//sortingAlgoObj.stressAlgo("selection",unSortedNumbers,iteration);
 		//sortingAlgoObj.stressAlgo("bubble",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("insertion",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("merge",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("insertion",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("merge",unSortedNumbers,iteration);
+		sortingAlgoObj.stressAlgo("heap",unSortedNumbers,iteration);
 		
 	}
 	

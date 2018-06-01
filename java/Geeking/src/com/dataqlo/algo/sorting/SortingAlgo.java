@@ -41,6 +41,9 @@ public class SortingAlgo {
 			case "merge":
 				this.mergeSort(dataset,0,dataset.length-1);
 				break;
+			case "heap":
+				this.heapSort(dataset);
+				break;
 			default:
 				System.out.println("No Such Algo !");
 			}
@@ -154,5 +157,54 @@ public class SortingAlgo {
 			j++; k++;
 		}
 		//printSorted(array);
+	}
+	
+	private void heapSort(Integer[] unSortedArray){
+		
+		int n = unSortedArray.length;
+		
+		for(int i = n/2 - 1; i>=0; i--) {
+			heapify(unSortedArray, n, i);
+		}
+		/*System.out.println();
+		printSorted(unSortedArray);*/
+		
+		for(int i=n-1; i>=0; i--) {
+			int temp = unSortedArray[0];
+			unSortedArray[0] = unSortedArray[i];
+			unSortedArray[i] = temp;
+			
+			heapify(unSortedArray, i, 0);
+		}
+		/*System.out.println();
+		printSorted(unSortedArray);*/
+	}
+	
+	private void heapify(Integer[] unSortedArray, int arrayLength,int i) {
+		
+		int root = i;
+		int left = 2*i + 1;
+		int right = 2*i +2;
+		
+		/*System.out.println("Before: i=>"+i+" left=>"+left+" right=>"+right);*/
+		
+		if ( left < arrayLength && unSortedArray[left] > unSortedArray[i] ) {
+			root = left;
+		}
+		
+		if ( right < arrayLength && unSortedArray[right] > unSortedArray[i] ) {
+			root = right;
+		}
+		
+		if( root !=i) {
+			int swap = unSortedArray[i];
+			unSortedArray[i] = unSortedArray[root];
+			unSortedArray[root] = swap;
+			
+			/*System.out.println("After: i=>"+i+" left=>"+left+" right=>"+right);*/
+			
+			heapify(unSortedArray, arrayLength, root);
+		}
+			
 	}
 }
