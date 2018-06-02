@@ -5,8 +5,8 @@ import com.dataqlo.algo.sorting.SortingAlgo;
 // Main class for searching algorithms, sample data is in sorted form.
 public class ExecMain {
 	
-	static int dataSize = 10000; 
-	static int iteration= 100;
+	static int dataSize = 5; 
+	static int iteration= 1;
 	static Integer sortedNumbers[] = new Integer[dataSize] ;
 	static Integer unSortedNumbers[] = new Integer[dataSize] ;
 	
@@ -15,7 +15,7 @@ public class ExecMain {
 		
 		for(int i=0;i<dataSize; i++) {
 			sortedNumbers[i]=i;
-			unSortedNumbers[i]=(int) Math.ceil(Math.random() * 10000);
+			unSortedNumbers[i]=(int) Math.ceil(Math.random() * 10);
 			System.out.print(unSortedNumbers[i]+" ");
 		}
 		

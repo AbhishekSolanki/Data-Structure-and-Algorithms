@@ -105,7 +105,8 @@ public class SortingAlgo {
 	}
 	
 	
-	public void mergeSort(Integer[] unSortedArray, int low, int high) {
+	
+  	public void mergeSort(Integer[] unSortedArray, int low, int high) {
 		
 		if(low < high) {
 			int mid = (high + low) / 2 ;
@@ -159,51 +160,59 @@ public class SortingAlgo {
 		//printSorted(array);
 	}
 	
+	
 	private void heapSort(Integer[] unSortedArray){
+		//unSortedArray = new Integer[]{9,2,12, 6, 3, 10}; // Test data during dev.
 		
+		// all the parent nodes can be calculated by n/2-1
 		int n = unSortedArray.length;
-		
-		for(int i = n/2 - 1; i>=0; i--) {
-			heapify(unSortedArray, n, i);
+		for (int i = n/2 - 1; i>=0; i--) { // iterating only over parents node.
+			heapify(unSortedArray, n, i);  // gives the highest element in each parent node.
 		}
-		/*System.out.println();
-		printSorted(unSortedArray);*/
 		
-		for(int i=n-1; i>=0; i--) {
-			int temp = unSortedArray[0];
+		// At this stage each parent node is sorted, Highest would be at the root and lower value than the root
+		// at each level, the leaf node might contain the element which can be greater than other parents node.
+		// to calculate again we need to traverse from each element from botton to top at that too from right to left.
+		
+		for(int i = n-1; i> 0;i--) { // Iterating loop from last leaf node, from right to left 
+			int swapHighest = unSortedArray[0]; // Swapping the highest element at root node to the last 
 			unSortedArray[0] = unSortedArray[i];
-			unSortedArray[i] = temp;
+			unSortedArray[i] = swapHighest;
 			
-			heapify(unSortedArray, i, 0);
+			heapify(unSortedArray, n, 0); // sorting 
+			
 		}
-		/*System.out.println();
-		printSorted(unSortedArray);*/
+		// Finally Done :)
 	}
 	
-	private void heapify(Integer[] unSortedArray, int arrayLength,int i) {
+	private void heapify(Integer[] arr, int n,int i) {
 		
-		int root = i;
-		int left = 2*i + 1;
-		int right = 2*i +2;
+		int max = i; // Assuming the current parent is having max value.
+		int left = 2*i + 1; // left side nodes index
+		int right = 2*i + 2; // right side nodes index
 		
-		/*System.out.println("Before: i=>"+i+" left=>"+left+" right=>"+right);*/
+		// the equal to condition is not specified as if the value of the parent is same as the left/ right node there is no
+		// need to swap, also during the sorting of leaf nodes with other parent node (i.e second loop in heapSort, this servers as the 
+		// the barrier to swap the highest element again to the root node. Hence max values will be at the bootom.
 		
-		if ( left < arrayLength && unSortedArray[left] > unSortedArray[i] ) {
-			root = left;
+		if(left < n && arr[left] > arr[max]) {
+			max = left;
 		}
 		
-		if ( right < arrayLength && unSortedArray[right] > unSortedArray[i] ) {
-			root = right;
+		if(right < n && arr[right] > arr[max]) {
+			max = right;
 		}
 		
-		if( root !=i) {
-			int swap = unSortedArray[i];
-			unSortedArray[i] = unSortedArray[root];
-			unSortedArray[root] = swap;
+		// If new max is found than we need to swap the values.
+		if (max !=i) {
+			int swap = arr[i];
+			arr[i] = arr[max];
+			arr[max] = swap;
 			
-			/*System.out.println("After: i=>"+i+" left=>"+left+" right=>"+right);*/
-			
-			heapify(unSortedArray, arrayLength, root);
+			// At this stage we got the parent value as max, it is possible there are some parents whose value will be smaller than 
+			// the current level parent, this recursion ensures that, the max value should travel up. 
+			// During the second loop, this recursion rearranges the heap.
+			heapify(arr, n, max);
 		}
 			
 	}
