@@ -44,6 +44,9 @@ public class SortingAlgo {
 			case "heap":
 				this.heapSort(dataset);
 				break;
+			case "quick":
+				this.quickSort(dataset,0,dataset.length-1);
+				break;
 			default:
 				System.out.println("No Such Algo !");
 			}
@@ -110,6 +113,7 @@ public class SortingAlgo {
 		
 		if(low < high) {
 			int mid = (high + low) / 2 ;
+			// consequently divide the left and right array untill we get a single element.
 			mergeSort(unSortedArray, low, mid);
 			mergeSort(unSortedArray, mid+1, high);
 			
@@ -122,20 +126,23 @@ public class SortingAlgo {
 		
 		int leftArraySize = mid - low +1;
 		int rightArraySize = high - mid;
-		
+		// create a left and right array temporarily.
 		int[] leftArray = new int[leftArraySize];
 		int[] rightArray = new int[rightArraySize];
 		
+		// insert the smallest value from left side of the array to the left array
 		for(int i = 0; i < leftArraySize; i++) {
 			leftArray[i] = array[low+i];
 		}
-		
+
+		// insert the larger value from ride side of the array to the right array
 		for(int j = 0; j < rightArraySize; j++) {
 			rightArray[j] = array[mid +1 +j];
 		}
 		
 		int i = 0, j = 0, k = 0;
 		
+		// compare the left and right array and insert the smallest vlaues to the k th position.
 		while (i < leftArraySize && j < rightArraySize ) {
 			
 			if(leftArray[i] <= rightArray[j]) {
@@ -148,6 +155,7 @@ public class SortingAlgo {
 			k++;
 		}
 		
+		// Remaining element from left and right array
 		while ( i < leftArraySize) {
 			array[k] = leftArray[i];
 			i++; k++;
@@ -216,4 +224,42 @@ public class SortingAlgo {
 		}
 			
 	}
+	
+	private void quickSort(Integer[] unSortedArray, int low, int high) {
+		
+		if(low < high) {
+			// get the partition value and split the array into left and right subsequent parts
+			int partition = quickSortPartitioner(unSortedArray, low, high);
+			
+			quickSort(unSortedArray, low, partition-1);
+			quickSort(unSortedArray, partition+1, high);
+		}
+	}
+	
+	private int quickSortPartitioner(Integer[] arr, int low, int high) {
+		// taking the last element as the pivot value
+		int pivot = high;
+		
+		// i is the index position which actually calculated the partition point.
+		int i = low - 1;
+		for(int j = low; j < high; j++) {
+			
+			if(arr[j] <= pivot ) {
+				i++;
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		
+		// i+1 is the position of the pivot, towards left lower values will be there and towards right higher value.
+		int temp = arr[i+1];
+		arr[i+1] = arr[high];
+		arr[high] = temp;
+		
+		//return the parition value as mid point and call quickSort recursion towards left and right parts.
+		return i+1;
+	}
+	
+	
 }
