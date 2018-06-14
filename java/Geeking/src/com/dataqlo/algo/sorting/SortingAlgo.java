@@ -1,6 +1,7 @@
 package com.dataqlo.algo.sorting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SortingAlgo {
 
@@ -47,6 +48,9 @@ public class SortingAlgo {
 			case "quick":
 				this.quickSort(dataset,0,dataset.length-1);
 				break;
+			case "radix":
+				this.radixSort(dataset,dataset.length);
+				break;
 			default:
 				System.out.println("No Such Algo !");
 			}
@@ -57,7 +61,7 @@ public class SortingAlgo {
 		System.gc();
 	}
 
-	public void selectionSort(Integer[] unsortedArray) {
+	private void selectionSort(Integer[] unsortedArray) {
 
 		int arrayLength = unsortedArray.length;
 
@@ -73,7 +77,7 @@ public class SortingAlgo {
 		}
 	}
 
-	public void bubbleSort(Integer[] unsortedArray) {
+	private void bubbleSort(Integer[] unsortedArray) {
 
 		int arrayLength = unsortedArray.length;
 
@@ -91,7 +95,7 @@ public class SortingAlgo {
 		}
 	}
 	
-	public void insertionSort(Integer[] unsortedArray) {
+	private void insertionSort(Integer[] unsortedArray) {
 		int arrayLength= unsortedArray.length;
 		
 		for(int i=1;i<arrayLength-1;i++) {
@@ -109,7 +113,7 @@ public class SortingAlgo {
 	
 	
 	
-  	public void mergeSort(Integer[] unSortedArray, int low, int high) {
+  	private void mergeSort(Integer[] unSortedArray, int low, int high) {
 		
 		if(low < high) {
 			int mid = (high + low) / 2 ;
@@ -262,4 +266,50 @@ public class SortingAlgo {
 	}
 	
 	
+	private void radixSort(Integer[] unSortedArray, int arrayLength) {
+		
+		int mx = unSortedArray[0];
+        for (int i = 1; i < arrayLength; i++)
+            if (unSortedArray[i] > mx)
+                mx = unSortedArray[i];
+      
+        for(int exp = 1; mx/exp >0 ; exp*=10) {
+        this.countSort(unSortedArray,arrayLength,exp);
+        }
+       
+        
+	     for(int i=0;i<arrayLength;i++) {
+	    	 System.out.print(" "+unSortedArray[i] );
+	     }
+	}
+
+	
+	private void countSort(Integer[] unSortedArray, int arrayLength, int exp) {
+	      int output[] = new int[arrayLength];
+	      int count[] = new int[arrayLength];
+	      Arrays.fill(count, 0);
+	      
+	      // count the occurrence at each significant digit
+	      for (int i =0; i < arrayLength; i++) {
+	    	    count [ (unSortedArray[i]/exp)%10 ]++;
+	      }
+	      
+	      //calculate the exact position
+	      for (int i = 1; i < 10; i++)
+	          count[i] += count[i - 1];
+	      
+	      //generate the output
+	      for (int i = arrayLength - 1; i >= 0; i--)
+	      {
+	          output[count[ (unSortedArray[i]/exp)%10 ] - 1] = unSortedArray[i];
+	          count[ (unSortedArray[i]/exp)%10 ]--;
+	      }
+	      
+	      for (int i = 0; i < arrayLength; i++)
+	          unSortedArray[i] = output[i];
+	   
+	      
+	}
+	
+
 }

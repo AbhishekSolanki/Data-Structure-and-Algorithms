@@ -35,10 +35,11 @@ public class ExecMain {
 		System.out.println("Algorithm\tTime(ms) \n_________\t________ ");
 		//sortingAlgoObj.stressAlgo("selection",unSortedNumbers,iteration);
 		//sortingAlgoObj.stressAlgo("bubble",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("insertion",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("merge",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("heap",unSortedNumbers,iteration);
-		sortingAlgoObj.stressAlgo("quick",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("insertion",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("merge",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("heap",unSortedNumbers,iteration);
+		//sortingAlgoObj.stressAlgo("quick",unSortedNumbers,iteration);
+		sortingAlgoObj.stressAlgo("radix",unSortedNumbers,iteration);
 		
 	}
 	

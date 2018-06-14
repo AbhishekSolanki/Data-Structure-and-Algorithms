@@ -53,7 +53,7 @@ public class SearchAlgo {
 		System.gc();
 	}
 
-	public int linearSearch(Integer[] sortedNumbers, int x) {
+	protected int linearSearch(Integer[] sortedNumbers, int x) {
 		for(int i=0;i<sortedNumbers.length-1;i++) {
 			if(sortedNumbers[i]==x) {
 				return i;
